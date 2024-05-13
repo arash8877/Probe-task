@@ -1,0 +1,83 @@
+.container {
+    margin-inline: auto;
+    width: min(90%, 72rem);
+    height: 100vh;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 3rem 0;
+}
+
+.logoWrapper {
+    width: 6rem;
+    height: 6rem;
+    
+}
+
+.logo {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+.userName {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width:max-content;
+    height: 2rem;
+    padding: 1rem;
+    color: white;
+    background-color: black;
+    border-radius: 5px;
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 3rem;
+}
+
+.leftBar {
+    padding: 0 1rem;
+}
+
+.tagContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem; 
+  }
+  
+  .tag {
+    padding: 0.5rem 1rem; 
+    background-color: #007bff; 
+    color: white; 
+    border-radius: 5px; 
+    font-size: 14px; 
+  }
+
+.rightBar {
+    border: 1px solid black;
+    width: 100%;
+    border-radius: 5px;
+    padding: 0 1rem;
+    font-size: 14px;
+}
+
+
+@media (min-width: 805px) {
+    .main {
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 3rem;
+    }
+    .rightBar {
+       width: auto;
+    }
+ }
