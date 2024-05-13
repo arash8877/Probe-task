@@ -59,6 +59,10 @@ button:active {
     transform: scale(0.97);
   }
 
+  .switch {
+    color: black;
+}
+
 
 @media (min-width: 805px) {
     .logoWrapper {

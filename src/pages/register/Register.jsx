@@ -1,7 +1,39 @@
-import React from "react";
+import React, { useContext } from "react";
 import styles from "./Register.module.css";
+import { AuthContext } from "../../context";
+import { Link } from "react-router-dom";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 
-const Login = () => {
+const formSchema = Yup.object({
+  name: Yup.string()
+    .required("Name is required!")
+    .matches(/^[A-Za-z\s]+$/, "Name should only contain characters!")
+    .min(3, "Name must be at least 3 characters!"),
+  email: Yup.string().required("Email is required!"),
+  dob: Yup.string().required("Date of Birth is required!"),
+  password: Yup.string().required("Password is required!"),
+  repeatPassword: Yup.string().required("Please repeat password!"),
+});
+
+const Register = () => {
+  const { register, error } = useContext(AuthContext);
+
+  const formik = useFormik({
+    initialValues: {
+      name: "",
+      email: "",
+      dob: "",
+      password: "",
+      repeatPassword: "",
+    },
+    onSubmit: (values) => {
+      console.log(values);
+      register(values);
+    },
+    validationSchema: formSchema,
+  });
+
   return (
     <section className={styles.container}>
       <div className={styles.logoWrapper}>
@@ -12,33 +44,173 @@ const Login = () => {
         />
       </div>
       <div>
-        <form>
+        <form onSubmit={formik.handleSubmit}>
           <div>
-            <input type="text" placeholder="Name" />
-            <p>this is the error</p>
+            <input
+              type="text"
+              placeholder="Name"
+              value={formik.values.name}
+              onChange={formik.handleChange("name")}
+              onBlur={formik.handleBlur("name")}
+            />
+            <p>{formik.touched.name && formik.errors.name}</p>
           </div>
           <div>
-            <input type="text" placeholder="DOB" />
-            <p>this is the error</p>
+            <input
+              type="date"
+              placeholder="DOB"
+              value={formik.values.dob}
+              onChange={formik.handleChange("dob")}
+              onBlur={formik.handleBlur("dob")}
+            />
+            <p>{formik.touched.dob && formik.errors.dob}</p>
           </div>
           <div>
-            <input type="email" placeholder="Email" />
-            <p>this is the error</p>
+            <input
+              type="email"
+              placeholder="Email"
+              value={formik.values.email}
+              onChange={formik.handleChange("email")}
+              onBlur={formik.handleBlur("email")}
+            />
+            <p>{formik.touched.email && formik.errors.email}</p>
           </div>
           <div>
-            <input type="password" placeholder="Password" />
-            <p>this is the error</p>
+            <input
+              type="password"
+              placeholder="Password"
+              value={formik.values.password}
+              onChange={formik.handleChange("password")}
+              onBlur={formik.handleBlur("password")}
+            />
+            <p>{formik.touched.password && formik.errors.password}</p>
           </div>
           <div>
-            <input type="password" placeholder="Repeat Password" />
-            <p>this is the error</p>
+            <input
+              type="password"
+              placeholder="Repeat Password"
+              value={formik.values.repeatPassword}
+              onChange={formik.handleChange("repeatPassword")}
+              onBlur={formik.handleBlur("repeatPassword")}
+            />
+            <p>
+              {" "}
+              {formik.touched.repeatPassword && formik.errors.repeatPassword}
+            </p>
           </div>
-          <p>this is the main error</p>
-          <button>Login</button>
+          <p>{error}</p>
+          <button>Register</button>
         </form>
+        <p className={styles.switch}>
+          Already have an account? <Link to="/login"> Login</Link>
+        </p>
       </div>
     </section>
   );
 };
 
-export default Login;
+export default Register;
+
+//------------------------------------------------------------
+
+// const Register = () => {
+
+//   return (
+//     <section>
+//       <form className="box" onSubmit={formik.handleSubmit}>
+//         <h1 className="title has-text-centered mb-5">Register </h1>
+//         <h1 className="has-text-centered has-text-danger py-3">{error}</h1>
+//         <div className="field">
+//           <label className="label">Name</label>
+//           <div className="control">
+//             <input
+//               type="text"
+//               className="input"
+//               placeholder="Your name"
+//               value={formik.values.name}
+//               onChange={formik.handleChange("name")}
+//               onBlur={formik.handleBlur("name")}
+//             />
+//             <p className="help has-text-danger">
+//               {formik.touched.name && formik.errors.name}
+//             </p>
+//           </div>
+//         </div>
+//         <div className="field">
+//           <label className="label">Email</label>
+//           <div className="control">
+//             <input
+//               type="text"
+//               className="input"
+//               placeholder="Email Address"
+//               value={formik.values.email}
+//               onChange={formik.handleChange("email")}
+//               onBlur={formik.handleBlur("email")}
+//             />
+//             <p className="help has-text-danger">
+//               {formik.touched.email && formik.errors.email}
+//             </p>
+//           </div>
+//         </div>
+//         <div className="field">
+//           <label className="label">Date of birth</label>
+//           <div className="control">
+//             <input
+//               type="date"
+//               className="input"
+//               placeholder="Date of birth"
+//               value={formik.values.dob}
+//               onChange={formik.handleChange("dob")}
+//               onBlur={formik.handleBlur("dob")}
+//             />
+//             <p className="help has-text-danger">
+//               {formik.touched.dob && formik.errors.dob}
+//             </p>
+//           </div>
+//         </div>
+//         <div className="field">
+//           <label className="label">Password</label>
+//           <div className="control">
+//             <input
+//               type="password"
+//               className="input"
+//               placeholder="Password"
+//               value={formik.values.password}
+//               onChange={formik.handleChange("password")}
+//               onBlur={formik.handleBlur("password")}
+//             />
+//             <p className="help has-text-danger">
+//               {formik.touched.password && formik.errors.password}
+//             </p>
+//           </div>
+//         </div>
+//         <div className="field">
+//           <label className="label">Repeat Password</label>
+//           <div className="control">
+//             <input
+//               type="password"
+//               className="input"
+//               placeholder="Password"
+//               value={formik.values.repeatPassword}
+//               onChange={formik.handleChange("repeatPassword")}
+//               onBlur={formik.handleBlur("repeatPassword")}
+//             />
+//             <p className="help has-text-danger">
+//               {formik.touched.repeatPassword && formik.errors.repeatPassword}
+//             </p>
+//           </div>
+//         </div>
+//         <div className="field mt-5">
+//           <button type="submit" className="button is-success is-fullwidth"></button>
+//           register
+//           </button>
+//         </div>
+//       </form>
+//       <p>
+//         Already have an account? <Link to="/login"> Login</Link>
+//       </p>
+//     </section>
+//   );
+// };
+
+// export default Register;

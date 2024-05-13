@@ -22,6 +22,7 @@ export const AuthProvider = ({ children }) => {
     );
 
     if (user) {
+      setError("");
       setUserId(user.id);
       setName(user.name);
       navigate("trial");
@@ -35,9 +36,16 @@ export const AuthProvider = ({ children }) => {
       id: users.length + 1,
       name: inputs.name,
       email: inputs.email,
+      dob: inputs.dob,
       password: inputs.password,
+      repeatPassword: inputs.repeatPassword,
     };
+    if (inputs.password !== inputs.repeatPassword) {
+      setError("Passwords do not match!");
+      return;
+    }
     setUsers((prevUsers) => [...prevUsers, newUser]);
+    setError("");
     navigate("login");
   };
 

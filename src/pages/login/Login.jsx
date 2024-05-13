@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import styles from "./Login.module.css";
-
+import { Link } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { AuthContext } from "../../context";
@@ -61,6 +61,9 @@ const Login = () => {
           <button>Login</button>
         </form>
       </div>
+      <p className={styles.switch}>
+        Don't have an account? <Link to="/register"> Register</Link>
+      </p>
     </section>
   );
 };
