@@ -1,8 +1,31 @@
 import React, { useContext } from "react";
 import styles from "./Login.module.css";
 
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import { AuthContext } from "../../context";
+
+const formSchema = Yup.object({
+  //to handle form-validation
+  email: Yup.string().required("Email is required!"),
+  password: Yup.string().required("Password is required!"),
+});
 
 const Login = () => {
+  const { login, error } = useContext(AuthContext);
+
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    onSubmit: (values) => {
+      console.log(values);
+      login(values);
+    },
+    validationSchema: formSchema,
+  });
+
   return (
     <section className={styles.container}>
       <div className={styles.logoWrapper}>
@@ -13,15 +36,28 @@ const Login = () => {
         />
       </div>
       <div className={styles.form}>
-        <form className={styles.form}>
+        <form onSubmit={formik.handleSubmit}>
           <div className={styles.input}>
-            <input type="email" placeholder="Email" />
-            <p className={styles.error}>error is here</p>
+            <input
+              type="email"
+              placeholder="Email"
+              value={formik.values.email}
+              onChange={formik.handleChange("email")}
+              onBlur={formik.handleBlur("email")}
+            />
+            <p>{formik.touched.email && formik.errors.email}</p>
           </div>
           <div>
-            <input className={styles.input} type="email" placeholder="Email" />
-            <p className={styles.error}>error is here</p>
+            <input
+              type="password"
+              placeholder="Password"
+              value={formik.values.password}
+              onChange={formik.handleChange("password")}
+              onBlur={formik.handleBlur("password")}
+            />
+            <p>{formik.touched.password && formik.errors.password}</p>
           </div>
+          <p>{error}</p>
           <button>Login</button>
         </form>
       </div>
