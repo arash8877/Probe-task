@@ -1,6 +1,6 @@
 import { createContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import usersDb from "./users.json";
+import usersDb from "../users.json";
 
 export const AuthContext = createContext();
 
@@ -25,7 +25,7 @@ export const AuthProvider = ({ children }) => {
       setError("");
       setUserId(user.id);
       setName(user.name);
-      navigate("trial");
+      navigate("trials");
     } else {
       setError("User not found!");
     }

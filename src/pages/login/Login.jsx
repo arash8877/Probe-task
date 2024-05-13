@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import styles from "./Login.module.css";
+import { AuthContext } from "../../contexts/AuthContext";
 import { Link } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { AuthContext } from "../../context";
 
 const formSchema = Yup.object({
   //to handle form-validation
@@ -20,7 +20,6 @@ const Login = () => {
       password: "",
     },
     onSubmit: (values) => {
-      console.log(values);
       login(values);
     },
     validationSchema: formSchema,

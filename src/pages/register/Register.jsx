@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import styles from "./Register.module.css";
-import { AuthContext } from "../../context";
+import { AuthContext } from "../../contexts/AuthContext";
 import { Link } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
