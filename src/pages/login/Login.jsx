@@ -35,9 +35,9 @@ const Login = () => {
           alt="logo"
         />
       </div>
-      <div className={styles.form}>
+      <div>
         <form onSubmit={formik.handleSubmit}>
-          <div className={styles.input}>
+          <div>
             <input
               type="email"
               placeholder="Email"
