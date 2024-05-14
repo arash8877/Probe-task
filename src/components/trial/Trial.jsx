@@ -19,7 +19,7 @@ const Trial = ({ trial }) => {
   
   return (
     <li className={styles.trial}>
-      <Link to={nctId}>
+      <Link to={`/trials/${nctId}`}>
         <h5 className={styles.title}>{briefTitle}</h5>
         <p>{officialTitle}</p>
         <p>nctId: {nctId}</p>

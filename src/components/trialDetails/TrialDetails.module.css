@@ -22,9 +22,9 @@
     padding: 0.6rem;
     width: 6rem;
     font-weight: 300;
-    color: black;
-    background-color: transparent;
-    border: 1px solid black;
+    color: gray;
+    background-color: wheat;
+    border: none;
     border-radius: 10px;
     cursor: pointer;
 }

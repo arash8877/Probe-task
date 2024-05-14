@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styles from "./Trials.module.css";
 import { AuthContext } from "../../contexts/AuthContext";
 import Trial from "../../components/trial/Trial";
@@ -6,12 +6,17 @@ import { TrialContext } from "../../contexts/TrialContext";
 import { Link } from "react-router-dom";
 
 const Trials = () => {
+  const [isGridView, setIsGridView] = useState(true);
   const { name, getProfileInfo } = useContext(AuthContext);
   const { trials } = useContext(TrialContext);
 
   useEffect(() => {
     getProfileInfo();
   }, [getProfileInfo]);
+
+  const toggleViewMode = () => {
+    setIsGridView((prevState) => !prevState);
+  };
 
   return (
     <section className={styles.container}>
@@ -23,15 +28,18 @@ const Trials = () => {
             alt="logo"
           />
         </div>
+        <button className={styles.switchButton} onClick={toggleViewMode}>
+          {isGridView ? "Switch to List View" : "Switch to Grid View"}
+        </button>
         <Link to="/profile">
           <div className={styles.userName}>{name}</div>
         </Link>
       </div>
-      <ul>
+      <u className={isGridView ? styles.gridContainer : styles.listContainer}>
         {trials.map((trial, index) => {
           return <Trial key={index} trial={trial} />;
         })}
-      </ul>
+      </u>
     </section>
   );
 };
