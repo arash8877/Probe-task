@@ -30,9 +30,9 @@ const ProfileHeader = () => {
         <p>Hi, {name}</p>
       </div>
       <div className={styles.buttons}>
-        <button onClick={() => handleLogout()}>Logout</button>
+        <button className={styles.button} onClick={() => handleLogout()}>Logout</button>
         <Link to="/trials">
-          <button>Go to Trials</button>
+          <button className={styles.button}>Go to Trials</button>
         </Link>
       </div>
     </div>

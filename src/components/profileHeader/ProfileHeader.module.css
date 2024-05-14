@@ -33,7 +33,7 @@
     gap: 0rem;
 }
 
-button {
+.button {
     padding: 1rem;
     width: 9rem;
     font-weight: bold;

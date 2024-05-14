@@ -1,11 +1,13 @@
 import React, { useContext, useEffect } from "react";
 import styles from "./TrialDetails.module.css";
+import { useNavigate } from "react-router-dom";
 import { TrialContext } from "../../contexts/TrialContext";
 import { useParams } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
 
 const TrialDetails = () => {
   const { getTrial, trial } = useContext(TrialContext);
+  const navigate = useNavigate();
   const { nctId } = useParams();
   const { name, getProfileInfo } = useContext(AuthContext);
   const { protocolSection } = trial || {};
@@ -37,13 +39,19 @@ const TrialDetails = () => {
   return (
     <section className={styles.container}>
       <div className={styles.header}>
-        <div className={styles.logoWrapper}>
-          <img
-            className={styles.logo}
-            src="https://images.unsplash.com/photo-1516876437184-593fda40c7ce?q=80&w=2072&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-            alt="logo"
-          />
+        <div className={styles.logo_and_back}>
+          <div className={styles.logoWrapper}>
+            <img
+              className={styles.logo}
+              src="https://images.unsplash.com/photo-1516876437184-593fda40c7ce?q=80&w=2072&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              alt="logo"
+            />
+          </div>
+          <button className={styles.button} onClick={() => navigate(-1)}>
+            Back
+          </button>
         </div>
+
         <div className={styles.userName}>{name}</div>
       </div>
       <div className={styles.main}>

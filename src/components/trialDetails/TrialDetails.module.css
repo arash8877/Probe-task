@@ -11,6 +11,24 @@
     margin: 3rem 0;
 }
 
+.logo_and_back {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.button {
+    padding: 0.6rem;
+    width: 6rem;
+    font-weight: 300;
+    color: white;
+    background-color: black;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
 .logoWrapper {
     width: 6rem;
     height: 6rem;
