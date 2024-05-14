@@ -1,4 +1,5 @@
 import React, { useContext, useEffect } from "react";
+import { Navigate } from "react-router-dom";
 import styles from "./TrialDetails.module.css";
 import { Link, useNavigate } from "react-router-dom";
 import { TrialContext } from "../../contexts/TrialContext";
@@ -14,6 +15,11 @@ const TrialDetails = () => {
   const { nctId } = useParams();
   const { name, getProfileInfo } = useContext(AuthContext);
   const { protocolSection } = trial || {};
+
+  if (Object.keys(trial).length === 0) {
+    navigate("*");
+  }
+
   const {
     identificationModule,
     descriptionModule,

@@ -8,10 +8,20 @@ const NotFound = () => {
   return (
     <div className={styles.container}>
       <h1>Page Not Found!</h1>
-      <h5>Please either check the url or login to your account.</h5>
-      <div className={styles.link}>
-        <Link to="/">Log in</Link>
-      </div>
+      {userId ? (
+        <>
+          <div className={styles.link}>
+            <Link to="/">Go to Trials</Link>
+          </div>
+        </>
+      ) : (
+        <>
+          <h1>Please either check the url or login to your account.</h1>
+          <div className={styles.link}>
+            <Link to="/">Login</Link>
+          </div>
+        </>
+      )}
     </div>
   );
 };

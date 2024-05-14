@@ -1,8 +1,9 @@
 import React from "react";
-import styles from "./Trial.module.css"
+import styles from "./Trial.module.css";
 import { Link } from "react-router-dom";
 
 const Trial = ({ trial }) => {
+  console.log(trial);
   const { protocolSection } = trial;
   const {
     identificationModule,
@@ -16,7 +17,7 @@ const Trial = ({ trial }) => {
   const [location] = contactsLocationsModule?.locations || [];
   const city = location?.city;
   const state = location?.state;
-  
+
   return (
     <li className={styles.trial}>
       <Link to={`/trials/${nctId}`}>

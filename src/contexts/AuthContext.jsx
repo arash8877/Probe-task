@@ -1,6 +1,6 @@
-import { createContext, useState, useEffect, useCallback } from "react";
+import { createContext, useState, useEffect } from "react";
+import { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
-
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
@@ -19,29 +19,30 @@ export const AuthProvider = ({ children }) => {
     if (user) {
       setName(user.name);
       setUserId(user.id);
+
+      console.log("user", user);
     }
   }, [setName]);
 
   useEffect(() => {
     // Store users in local storage whenever it changes
     localStorage.setItem("users", JSON.stringify(users));
-  }, [users]);
+    getProfileInfo();
+  }, [users, getProfileInfo]);
 
   const login = (inputs) => {
     const user = users.find(
       (user) => user.email === inputs.email && user.password === inputs.password
     );
     if (user) {
-      setError("");
       setUserId(user.id);
       setName(user.name);
       localStorage.setItem("user", JSON.stringify(user));
       navigate("trials");
     } else {
-      setError("User not found!");
+      setError("Invalid email or password!");
     }
   };
-
   const register = (inputs) => {
     const newUser = {
       id: users.length + 1,
@@ -56,27 +57,24 @@ export const AuthProvider = ({ children }) => {
       return;
     }
     setUsers((prevUsers) => [...prevUsers, newUser]);
-    localStorage.setItem("user", JSON.stringify(newUser)); 
-    setError("");
+    localStorage.setItem("user", JSON.stringify(newUser));
     navigate("login");
   };
 
   const logout = () => {
     setUserId(null);
     setName(null);
+
     localStorage.removeItem("user");
+
     navigate("login");
   };
 
-  const value = {
-    login,
-    userId,
-    error,
-    register,
-    name,
-    getProfileInfo,
-    logout,
-  };
-
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider
+      value={{ login, userId, error, register, name, getProfileInfo, logout }}
+    >
+      {children}
+    </AuthContext.Provider>
+  );
 };

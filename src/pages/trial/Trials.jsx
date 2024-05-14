@@ -9,7 +9,7 @@ const Trials = () => {
   const [isGridView, setIsGridView] = useState(true);
   const { name, getProfileInfo } = useContext(AuthContext);
   const { trials } = useContext(TrialContext);
-
+  console.log(trials);
   useEffect(() => {
     getProfileInfo();
   }, [getProfileInfo]);
@@ -35,11 +35,11 @@ const Trials = () => {
           <div className={styles.userName}>{name}</div>
         </Link>
       </div>
-      <u className={isGridView ? styles.gridContainer : styles.listContainer}>
+      <ul className={isGridView ? styles.gridContainer : styles.listContainer}>
         {trials.map((trial, index) => {
           return <Trial key={index} trial={trial} />;
         })}
-      </u>
+      </ul>
     </section>
   );
 };
