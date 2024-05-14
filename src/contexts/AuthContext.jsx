@@ -14,18 +14,14 @@ export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
 
   const getProfileInfo = useCallback(() => {
-    // Get user data from local storage
     const user = JSON.parse(localStorage.getItem("user"));
     if (user) {
       setName(user.name);
       setUserId(user.id);
-
-      console.log("user", user);
     }
   }, [setName]);
 
   useEffect(() => {
-    // Store users in local storage whenever it changes
     localStorage.setItem("users", JSON.stringify(users));
     getProfileInfo();
   }, [users, getProfileInfo]);
@@ -35,6 +31,7 @@ export const AuthProvider = ({ children }) => {
       (user) => user.email === inputs.email && user.password === inputs.password
     );
     if (user) {
+      setError("");
       setUserId(user.id);
       setName(user.name);
       localStorage.setItem("user", JSON.stringify(user));
@@ -44,6 +41,7 @@ export const AuthProvider = ({ children }) => {
     }
   };
   const register = (inputs) => {
+    setError("");
     const newUser = {
       id: users.length + 1,
       name: inputs.name,
@@ -64,9 +62,7 @@ export const AuthProvider = ({ children }) => {
   const logout = () => {
     setUserId(null);
     setName(null);
-
     localStorage.removeItem("user");
-
     navigate("login");
   };
 
