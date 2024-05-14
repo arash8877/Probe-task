@@ -23,6 +23,14 @@ export const FavoriteProvider = ({ children }) => {
       )
     );
   };
+  useEffect(() => {
+    localStorage.setItem("favorites", JSON.stringify(favorites));
+  }, [favorites]);
+
+  const clearFavorites = () => {
+    setFavorites([]);
+    localStorage.removeItem("favorites");
+  };
 
 
   return (
