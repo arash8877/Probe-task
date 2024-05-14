@@ -1,8 +1,8 @@
 import React, { useContext, useEffect } from "react";
 import styles from "./Trials.module.css";
-import { AuthContext } from "../contexts/AuthContext";
-import Trial from "../components/Trial";
-import { TrialContext } from "../contexts/TrialContext";
+import { AuthContext } from "../../contexts/AuthContext";
+import Trial from "../../components/trial/Trial";
+import { TrialContext } from "../../contexts/TrialContext";
 
 const Trials = () => {
   const { name } = useContext(AuthContext);
@@ -18,7 +18,7 @@ const Trials = () => {
             alt="logo"
           />
         </div>
-          <div className={styles.userName}>user.name{name}</div>
+          <div className={styles.userName}>{name}</div>
       </div>
       <ul>
         {trials.map((trial, index) => {

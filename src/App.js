@@ -2,10 +2,11 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 import Login from "./pages/login/Login";
 import Register from "./pages/register/Register";
-import Trials from "./pages/Trials";
-import TrialDetails from "./components/TrialDetails";
+import TrialDetails from "./components/trialDetails/TrialDetails";
 import { TrialProvider } from "./contexts/TrialContext";
 import { AuthProvider } from "./contexts/AuthContext";
+import Trials from "./pages/trial/Trials";
+import Profile from "./pages/profile/Profile";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
             <Route path="register" element={<Register />} />
             <Route path="trials" element={<Trials />} />
             <Route path="trials/:nctId" element={<TrialDetails />} />
+            <Route path="profile" element={<Profile />} />
           </Routes>
         </TrialProvider>
       </AuthProvider>

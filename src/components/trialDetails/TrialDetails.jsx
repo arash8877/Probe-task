@@ -1,11 +1,13 @@
 import React, { useContext, useEffect } from "react";
 import styles from "./TrialDetails.module.css";
-import { TrialContext } from "../contexts/TrialContext";
+import { TrialContext } from "../../contexts/TrialContext";
 import { useParams } from "react-router-dom";
+import { AuthContext } from "../../contexts/AuthContext";
 
 const TrialDetails = () => {
   const { getTrial, trial } = useContext(TrialContext);
   const { nctId } = useParams();
+  const { name } = useContext(AuthContext);
   const { protocolSection } = trial || {};
   const {
     identificationModule,
@@ -38,7 +40,7 @@ const TrialDetails = () => {
             alt="logo"
           />
         </div>
-        <div className={styles.userName}>user.name</div>
+        <div className={styles.userName}>{name}</div>
       </div>
       <div className={styles.main}>
         <div className={styles.leftBar}>

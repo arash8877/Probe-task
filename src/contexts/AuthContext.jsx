@@ -20,11 +20,11 @@ export const AuthProvider = ({ children }) => {
     const user = users.find(
       (user) => user.email === inputs.email && user.password === inputs.password
     );
-
     if (user) {
-      setError("");
+      // setError("");
       setUserId(user.id);
       setName(user.name);
+      localStorage.setItem("user", JSON.stringify(user));
       navigate("trials");
     } else {
       setError("User not found!");
@@ -46,6 +46,15 @@ export const AuthProvider = ({ children }) => {
     }
     setUsers((prevUsers) => [...prevUsers, newUser]);
     setError("");
+    navigate("login");
+  };
+
+  const logout = () => {
+    setUserId(null);
+    setName(null);
+
+    localStorage.removeItem("user");
+
     navigate("login");
   };
 
