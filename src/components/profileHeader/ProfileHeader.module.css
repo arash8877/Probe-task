@@ -45,6 +45,14 @@
     cursor: pointer;
 }
 
+.button:Hover {
+    background-color: gray;
+}
+
+.text {
+    color: black;
+}
+
 button:active {
     transform: scale(0.97);
   }

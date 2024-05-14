@@ -79,7 +79,7 @@ const TrialDetails = () => {
         <div className={styles.leftBar}>
           <div className={styles.leftBar_top}>
             <h4>{briefTitle}</h4>
-            <p>{detailedDescription}</p>
+            <p className={styles.description}>{detailedDescription}</p>
             <div className={styles.tagContainer}>
               {keywords &&
                 keywords.map((condition, index) => {
@@ -96,7 +96,7 @@ const TrialDetails = () => {
           </button>
         </div>
         <div className={styles.rightBar}>
-          <ul>
+          <ul className={styles.list}>
             <li>ID: {nctId}</li>
             <li>Date: {statusVerifiedDate}</li>
             <li>Eligibility: {sex}</li>

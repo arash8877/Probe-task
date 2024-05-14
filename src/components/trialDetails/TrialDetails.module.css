@@ -70,6 +70,11 @@
     padding: 0 1rem;
 }
 
+.description {
+    color: black;
+    text-align: start;
+}
+
 .tagContainer {
     display: flex;
     flex-wrap: wrap;
@@ -87,10 +92,19 @@
   .favButton {
     width: 6rem;
     padding: 0.6rem 1rem;
+    border: none;
+    border-radius: 5px;
+    margin-top: 3rem;
+    background-color: wheat;
+    cursor: pointer;
   }
 
   .favButton:hover {
-    background-color: gray;
+    background-color: rgb(244, 237, 224);
+}
+
+.favButton:active {
+    transform: scale(0.97);
 }
 
 
@@ -100,6 +114,10 @@
     border-radius: 5px;
     padding: 0 1rem;
     font-size: 14px;
+}
+
+.list {
+    list-style-type: none;
 }
 
 

@@ -13,7 +13,7 @@ export const TrialProvider = ({ children }) => {
         const data = await res.json();
         setTrials(data.studies);
       } catch (error) {
-        setError("An error occurred. Please try again later.");
+        setError(error.toString());
       }
     };
     getTrials();
@@ -27,7 +27,7 @@ export const TrialProvider = ({ children }) => {
       const data = await res.json();
       setTrial(data);
     } catch (error) {
-      setError("An error occurred. Please try again later.");
+      setError(error.toString());
     }
   };
 

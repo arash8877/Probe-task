@@ -22,12 +22,12 @@ const Trial = ({ trial }) => {
     <li className={styles.trial}>
       <Link to={`/trials/${nctId}`}>
         <h5 className={styles.title}>{briefTitle}</h5>
-        <p>{officialTitle}</p>
-        <p>nctId: {nctId}</p>
-        <p> Date: {statusVerifiedDate}</p>
-        <p>Eligibility: {sex} </p>
+        <p className={styles.text}>{officialTitle}</p>
+        <p className={styles.text}>nctId: {nctId}</p>
+        <p className={styles.text}> Date: {statusVerifiedDate}</p>
+        <p className={styles.text}>Eligibility: {sex} </p>
         {city && (
-          <p>
+          <p className={styles.text}>
             Location: {city}
             {state && `, ${state}`}
           </p>

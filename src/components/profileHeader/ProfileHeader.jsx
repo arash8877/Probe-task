@@ -27,7 +27,7 @@ const ProfileHeader = () => {
             alt="logo"
           />
         </div>
-        <p>Hi, {name}</p>
+        <p className={styles.text}>Hi, {name}</p>
       </div>
       <div className={styles.buttons}>
         <button className={styles.button} onClick={() => handleLogout()}>Logout</button>

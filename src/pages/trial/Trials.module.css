@@ -36,9 +36,12 @@
     cursor: pointer;
 }
 
+.userName:hover {
+    background-color: gray;
+}
+
 ul {
     padding: 0;
-    list-style-type: none;
   }
 
   .gridContainer {
@@ -46,12 +49,16 @@ ul {
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 1rem;
     list-style-type: none;
+   list-style-type: none;
+
 }
 
 .listContainer {
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    list-style-type: none;
+
 }
 
 .switchButton {
@@ -61,6 +68,13 @@ ul {
    color: gray;
    width: fit-content;
    padding: 0.6rem 1rem;
+   border: none;
+   border-radius: 5px;
+   cursor: pointer;
+}
+
+.switchButton:hover {
+    background-color: rgb(215, 207, 207);
 }
 
 
