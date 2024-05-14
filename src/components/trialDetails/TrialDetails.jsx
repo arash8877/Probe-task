@@ -4,9 +4,12 @@ import { useNavigate } from "react-router-dom";
 import { TrialContext } from "../../contexts/TrialContext";
 import { useParams } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
+import { FavoriteContext } from "../../contexts/FavContext";
 
 const TrialDetails = () => {
   const { getTrial, trial } = useContext(TrialContext);
+  const { favorites, addFavorite, removeFavorite } =
+    useContext(FavoriteContext);
   const navigate = useNavigate();
   const { nctId } = useParams();
   const { name, getProfileInfo } = useContext(AuthContext);
@@ -28,6 +31,17 @@ const TrialDetails = () => {
   const city = location?.city;
   const state = location?.state;
 
+  const isFavorite = favorites.some(
+    (favorite) => favorite.protocolSection.identificationModule.nctId === nctId
+  );
+  const toggleFavorite = () => {
+    if (isFavorite) {
+      removeFavorite(nctId);
+    } else {
+      addFavorite(trial);
+    }
+  };
+
   useEffect(() => {
     getTrial(nctId);
   }, [nctId, getTrial]);
@@ -47,7 +61,7 @@ const TrialDetails = () => {
               alt="logo"
             />
           </div>
-          <button className={styles.button} onClick={() => navigate(-1)}>
+          <button className={styles.backButton} onClick={() => navigate(-1)}>
             Back
           </button>
         </div>
@@ -56,18 +70,23 @@ const TrialDetails = () => {
       </div>
       <div className={styles.main}>
         <div className={styles.leftBar}>
-          <h4>{briefTitle}</h4>
-          <p>{detailedDescription}</p>
-          <div className={styles.tagContainer}>
-            {keywords &&
-              keywords.map((condition, index) => {
-                return (
-                  <div key={index} className={styles.tag}>
-                    {condition}
-                  </div>
-                );
-              })}
+          <div className={styles.leftBar_top}>
+            <h4>{briefTitle}</h4>
+            <p>{detailedDescription}</p>
+            <div className={styles.tagContainer}>
+              {keywords &&
+                keywords.map((condition, index) => {
+                  return (
+                    <div key={index} className={styles.tag}>
+                      {condition}
+                    </div>
+                  );
+                })}
+            </div>
           </div>
+          <button className={styles.favButton} onClick={toggleFavorite}>
+            {isFavorite ? "Un-fav" : "Fav"}
+          </button>
         </div>
         <div className={styles.rightBar}>
           <ul>

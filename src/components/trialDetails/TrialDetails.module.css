@@ -18,16 +18,21 @@
     gap: 1rem;
 }
 
-.button {
+.backButton {
     padding: 0.6rem;
     width: 6rem;
     font-weight: 300;
-    color: white;
-    background-color: black;
-    border: none;
+    color: black;
+    background-color: transparent;
+    border: 1px solid black;
     border-radius: 10px;
     cursor: pointer;
 }
+
+.backButton:hover {
+    background-color: rgb(238, 234, 234);
+}
+
 
 .logoWrapper {
     width: 6rem;
@@ -78,6 +83,16 @@
     border-radius: 5px; 
     font-size: 14px; 
   }
+
+  .favButton {
+    width: 6rem;
+    padding: 0.6rem 1rem;
+  }
+
+  .favButton:hover {
+    background-color: gray;
+}
+
 
 .rightBar {
     border: 1px solid black;
