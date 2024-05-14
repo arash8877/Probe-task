@@ -3,6 +3,7 @@ import styles from "./Trials.module.css";
 import { AuthContext } from "../../contexts/AuthContext";
 import Trial from "../../components/trial/Trial";
 import { TrialContext } from "../../contexts/TrialContext";
+import { Link } from "react-router-dom";
 
 const Trials = () => {
   const { name, getProfileInfo } = useContext(AuthContext);
@@ -11,7 +12,6 @@ const Trials = () => {
   useEffect(() => {
     getProfileInfo();
   }, [getProfileInfo]);
-
 
   return (
     <section className={styles.container}>
@@ -23,7 +23,9 @@ const Trials = () => {
             alt="logo"
           />
         </div>
+        <Link to="/profile">
           <div className={styles.userName}>{name}</div>
+        </Link>
       </div>
       <ul>
         {trials.map((trial, index) => {

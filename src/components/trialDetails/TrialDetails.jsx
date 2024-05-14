@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import styles from "./TrialDetails.module.css";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { TrialContext } from "../../contexts/TrialContext";
 import { useParams } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
@@ -65,8 +65,9 @@ const TrialDetails = () => {
             Back
           </button>
         </div>
-
-        <div className={styles.userName}>{name}</div>
+        <Link to="/profile">
+          <div className={styles.userName}>{name}</div>
+        </Link>
       </div>
       <div className={styles.main}>
         <div className={styles.leftBar}>
