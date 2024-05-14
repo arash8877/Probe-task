@@ -1,13 +1,15 @@
 import { createContext, useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
-import usersDb from "../users.json";
 
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [userId, setUserId] = useState("");
   const [error, setError] = useState("");
-  const [users, setUsers] = useState(usersDb);
+  const [users, setUsers] = useState(() => {
+    const localUsers = localStorage.getItem("users");
+    return localUsers ? JSON.parse(localUsers) : [];
+  });
   const [name, setName] = useState("");
   const navigate = useNavigate();
 
@@ -17,8 +19,6 @@ export const AuthProvider = ({ children }) => {
     if (user) {
       setName(user.name);
       setUserId(user.id);
-
-      console.log("user", user);
     }
   }, [setName]);
 
@@ -56,6 +56,7 @@ export const AuthProvider = ({ children }) => {
       return;
     }
     setUsers((prevUsers) => [...prevUsers, newUser]);
+    localStorage.setItem("user", JSON.stringify(newUser)); 
     setError("");
     navigate("login");
   };
@@ -63,9 +64,7 @@ export const AuthProvider = ({ children }) => {
   const logout = () => {
     setUserId(null);
     setName(null);
-
     localStorage.removeItem("user");
-
     navigate("login");
   };
 
@@ -79,9 +78,5 @@ export const AuthProvider = ({ children }) => {
     logout,
   };
 
-  return (
-    <AuthContext.Provider value={ value }>
-      {children}
-    </AuthContext.Provider>
-  );
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
