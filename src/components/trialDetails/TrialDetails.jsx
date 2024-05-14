@@ -7,7 +7,7 @@ import { AuthContext } from "../../contexts/AuthContext";
 const TrialDetails = () => {
   const { getTrial, trial } = useContext(TrialContext);
   const { nctId } = useParams();
-  const { name } = useContext(AuthContext);
+  const { name, getProfileInfo } = useContext(AuthContext);
   const { protocolSection } = trial || {};
   const {
     identificationModule,
@@ -29,6 +29,10 @@ const TrialDetails = () => {
   useEffect(() => {
     getTrial(nctId);
   }, [nctId, getTrial]);
+
+  useEffect(() => {
+    getProfileInfo();
+  }, [getProfileInfo]);
 
   return (
     <section className={styles.container}>

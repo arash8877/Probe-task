@@ -5,10 +5,10 @@ import ProfileHeader from "../../components/profileHeader/ProfileHeader";
 
 const Profile = () => {
   return (
-    <>
+    <div className={styles.container}>
       <ProfileHeader />
       <div>Profile</div>
-    </>
+    </div>
   );
 };
 

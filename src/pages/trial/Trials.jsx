@@ -5,8 +5,13 @@ import Trial from "../../components/trial/Trial";
 import { TrialContext } from "../../contexts/TrialContext";
 
 const Trials = () => {
-  const { name } = useContext(AuthContext);
+  const { name, getProfileInfo } = useContext(AuthContext);
   const { trials } = useContext(TrialContext);
+
+  useEffect(() => {
+    getProfileInfo();
+  }, [getProfileInfo]);
+
 
   return (
     <section className={styles.container}>

@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import usersDb from "../users.json";
 
@@ -8,8 +8,19 @@ export const AuthProvider = ({ children }) => {
   const [userId, setUserId] = useState("");
   const [error, setError] = useState("");
   const [users, setUsers] = useState(usersDb);
-  const [name, setName] = useState("xx");
+  const [name, setName] = useState("");
   const navigate = useNavigate();
+
+  const getProfileInfo = useCallback(() => {
+    // Get user data from local storage
+    const user = JSON.parse(localStorage.getItem("user"));
+    if (user) {
+      setName(user.name);
+      setUserId(user.id);
+
+      console.log("user", user);
+    }
+  }, [setName]);
 
   useEffect(() => {
     // Store users in local storage whenever it changes
@@ -21,7 +32,7 @@ export const AuthProvider = ({ children }) => {
       (user) => user.email === inputs.email && user.password === inputs.password
     );
     if (user) {
-      // setError("");
+      setError("");
       setUserId(user.id);
       setName(user.name);
       localStorage.setItem("user", JSON.stringify(user));
@@ -58,8 +69,18 @@ export const AuthProvider = ({ children }) => {
     navigate("login");
   };
 
+  const value = {
+    login,
+    userId,
+    error,
+    register,
+    name,
+    getProfileInfo,
+    logout,
+  };
+
   return (
-    <AuthContext.Provider value={{ login, error, register, name }}>
+    <AuthContext.Provider value={ value }>
       {children}
     </AuthContext.Provider>
   );

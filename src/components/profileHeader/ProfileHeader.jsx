@@ -1,16 +1,22 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import styles from "./ProfileHeader.module.css";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
 
 const ProfileHeader = () => {
-  const { name, logout } = useContext(AuthContext);
+  const { name, getProfileInfo,logout } = useContext(AuthContext);
   //   const { clearFavorites } = useContext(FavoriteContext);
   const handleLogout = () => {
     console.log("handleLogout");
     logout();
     // clearFavorites();
   };
+
+  useEffect(() => {
+    getProfileInfo();
+  }, [getProfileInfo]);
+
+
   return (
     <div className={styles.header}>
       <div className={styles.logo_and_name}>
