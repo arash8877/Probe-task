@@ -1,6 +1,8 @@
 import { createContext, useState, useEffect } from "react";
 import { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
+import jsonUsers from "../users.json";
+
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
@@ -8,7 +10,8 @@ export const AuthProvider = ({ children }) => {
   const [error, setError] = useState("");
   const [users, setUsers] = useState(() => {
     const localUsers = localStorage.getItem("users");
-    return localUsers ? JSON.parse(localUsers) : [];
+    const allUsers = localUsers ? [...JSON.parse(localUsers)] : [];
+    return [...allUsers, ...jsonUsers];
   });
   const [name, setName] = useState("");
   const navigate = useNavigate();
@@ -50,6 +53,13 @@ export const AuthProvider = ({ children }) => {
       password: inputs.password,
       repeatPassword: inputs.repeatPassword,
     };
+
+    const existingUser = users.find((user) => user.email === inputs.email);
+    if (existingUser) {
+      setError("User already exists!");
+      return;
+    }
+
     if (inputs.password !== inputs.repeatPassword) {
       setError("Passwords do not match!");
       return;

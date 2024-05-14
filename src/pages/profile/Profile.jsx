@@ -11,10 +11,10 @@ const Profile = () => {
     <div className={styles.container}>
       <ProfileHeader />
       <div className={styles.favoritesContainer}>
-        {favorites.length > 0 &&
+        {favorites.length > 0 ?
           favorites.map((trial, index) => {
             return <Trial key={index} trial={trial} />;
-          })}
+          }) : <h4 className={styles.favText}>There is no favorite trial yet!</h4>}
       </div>
     </div>
   );

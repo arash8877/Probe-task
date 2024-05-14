@@ -34,6 +34,15 @@ const Register = () => {
     validationSchema: formSchema,
   });
 
+  function ageValidation() {
+    const date = new Date();
+    date.setFullYear(date.getFullYear() - 18);
+    const year = date.getFullYear();
+    const month = (date.getMonth() + 1).toString().padStart(2, "0");
+    const day = date.getDate().toString().padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  }
+
   return (
     <section className={styles.container}>
       <div className={styles.logoWrapper}>
@@ -59,6 +68,7 @@ const Register = () => {
             <input
               type="date"
               placeholder="DOB"
+              max={ageValidation()}
               value={formik.values.dob}
               onChange={formik.handleChange("dob")}
               onBlur={formik.handleBlur("dob")}
